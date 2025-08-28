@@ -1,0 +1,10 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <h2>INACIF - Sistema de Mantenimiento</h2>
+  </div>
+  <div class="navbar-user">
+    <span class="username">{{ username }}</span>
+    <span class="user-roles">({{ userRoles.join(', ') }})</span>
+    <button class="logout-btn" (click)="logout()">Salir</button>
+  </div>
+</nav>
