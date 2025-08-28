@@ -3,8 +3,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN npm run build --if-present || npx ng build --configuration production
+RUN npm run build -- --configuration production
 FROM nginx:stable
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY dist/ /usr/share/nginx/html
+COPY --from=build /app/dist/inacif-frontend/ /usr/share/nginx/html
 EXPOSE 80

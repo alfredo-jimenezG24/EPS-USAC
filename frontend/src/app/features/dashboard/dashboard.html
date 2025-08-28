@@ -1,0 +1,65 @@
+<div class="dashboard-layout">
+  <app-navbar></app-navbar>
+  
+  <div class="dashboard-content">
+    <app-sidebar></app-sidebar>
+    
+    <main class="main-content">
+      <div class="dashboard-header">
+        <h1>Dashboard - Sistema de Mantenimiento INACIF</h1>
+        <p>Bienvenido, <strong>{{ username }}</strong></p>
+      </div>
+
+      <div class="dashboard-widgets">
+        <div class="widget">
+          <div class="widget-header">
+            <h3>Estado del Backend</h3>
+            <button class="refresh-btn" (click)="refreshHealthStatus()">🔄</button>
+          </div>
+          <div class="widget-content">
+            <div *ngIf="healthStatus" class="health-status success">
+              <div class="status-indicator"></div>
+              <div class="status-details">
+                <p><strong>Estado:</strong> {{ healthStatus.status }}</p>
+                <p><strong>Servicio:</strong> {{ healthStatus.service }}</p>
+              </div>
+            </div>
+            <div *ngIf="healthError" class="health-status error">
+              <div class="status-indicator"></div>
+              <div class="status-details">
+                <p><strong>Error:</strong> {{ healthError }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget">
+          <div class="widget-header">
+            <h3>Información del Usuario</h3>
+          </div>
+          <div class="widget-content">
+            <p><strong>Usuario:</strong> {{ username }}</p>
+            <p><strong>Roles:</strong> {{ userRoles.join(', ') }}</p>
+          </div>
+        </div>
+
+        <div class="widget">
+          <div class="widget-header">
+            <h3>Acceso Rápido</h3>
+          </div>
+          <div class="widget-content">
+            <p>Utilice el menú lateral para navegar entre las diferentes secciones del sistema:</p>
+            <ul class="quick-links">
+              <li *ngIf="userRoles.includes('ADMIN') || userRoles.includes('TECNICO')">Equipos</li>
+              <li *ngIf="userRoles.includes('ADMIN') || userRoles.includes('TECNICO')">Mantenimientos</li>
+              <li *ngIf="userRoles.includes('ADMIN') || userRoles.includes('TECNICO') || userRoles.includes('PROVEEDOR')">Tickets</li>
+              <li *ngIf="userRoles.includes('ADMIN')">Contratos</li>
+              <li *ngIf="userRoles.includes('ADMIN') || userRoles.includes('CONSULTA')">Reportes</li>
+              <li *ngIf="userRoles.includes('ADMIN') || userRoles.includes('TECNICO')">Alertas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
